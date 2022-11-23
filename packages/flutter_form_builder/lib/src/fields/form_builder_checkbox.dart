@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_form_builder/src/custom/checkbox_list_title_custom.dart';
 
 /// Single Checkbox field
 class FormBuilderCheckbox extends FormBuilderField<bool> {
@@ -56,6 +57,11 @@ class FormBuilderCheckbox extends FormBuilderField<bool> {
   /// If tristate is false (the default), [value] must not be null.
   final bool tristate;
 
+  /// This's used to change the icon shape
+  final OutlinedBorder? iconShape;
+
+  final VisualDensity? visualDensity;
+
   /// Whether to render icons and text in the [activeColor].
   ///
   /// No effort is made to automatically coordinate the [selected] state and the
@@ -87,6 +93,8 @@ class FormBuilderCheckbox extends FormBuilderField<bool> {
     VoidCallback? onReset,
     FocusNode? focusNode,
     required this.title,
+    this.visualDensity,
+    this.iconShape,
     this.activeColor,
     this.checkColor,
     this.subtitle,
@@ -114,7 +122,8 @@ class FormBuilderCheckbox extends FormBuilderField<bool> {
 
             return InputDecorator(
               decoration: state.decoration,
-              child: CheckboxListTile(
+              child: CheckboxListTileCustom(
+                iconShape: iconShape,
                 dense: true,
                 isThreeLine: false,
                 title: title,
@@ -134,6 +143,7 @@ class FormBuilderCheckbox extends FormBuilderField<bool> {
                 tristate: tristate,
                 contentPadding: contentPadding,
                 selected: selected,
+                visualDensity: visualDensity,
               ),
             );
           },
